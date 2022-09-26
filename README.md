@@ -10,5 +10,6 @@ Displayed podcasts are displayed in bootstrap cards with an img of the podcast a
 <img src="images/display.png" width=400>
 
 ##### Creating a note for a podcast
-notes are stored with a many to one relationship in the MySQL DB and displayed on a table below the podcast description when created
+notes are stored with a many to one relationship in the MySQL DB and displayed 
+on a table below the podcast description when created
 <img src="images/note.png" width=400>
