@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap style -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+</style>
+<body>
+    <div class="container">
+        <div class="row d-flex justify-content-end pt-5">
+            <a href="/logout"><button class="btn btn-outline-dark m-1">Logout</button></a>
+            <a href="/saved/podcasts"><button class="btn btn-outline-dark m-1">Saved Podcasts</button></a>
+        </div>
+        <div>
+            <h1>Find a podcast EPISODE!</h1>
+            <form action="/podcast/search" method = "POST">
+                <label for="podcast_name">Name of Episode:</label>
+                <input type="text" name="podcast_name">
+                <input type="submit" value="Find" class="btn btn-outline-dark">
+                {% for message in get_flashed_messages( category_filter = ['error_search_podcast'] ) %}
+                    {{message}}
+                {% endfor %}
+            </form>
+        </div>
+        <div>
+            <table class="table table-dark">
+                <h2>recent search</h2>
+                <thead>
+                    <tr>
+                        <th>Podcast</th>
+                        <th>Description:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="{{session['podcast_img']}}" alt="podcast image"></td>
+                        <td>{{session['podcast_description']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="/save/podcast" method="POST">
+                <input type="hidden" name="img" id="img" value="{{session['podcast_img']}}">
+                <input type="hidden" name="description" id="description" value="{{session['podcast_description']}}">
+                <input type="submit" value="Save Pod" class="btn btn-outline-dark m-3">
+            </form>
+        </div>
+    </div>
+
+    <!-- bootstrap script -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
